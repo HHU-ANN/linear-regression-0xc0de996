@@ -9,12 +9,22 @@ except ImportError as e:
     import numpy as np
 
 def ridge(data):
-    pass
+    # 1. 读取数据
+    X, y = read_data()
+    # 2. 根据算法求解weight
+    # Xw = y
+    # (X^T X)^-1 X^T X w = (X^T X)^-1 (X^T y)
+    # w = (X^T X)^-1 (X^T y)
+    weight = np.matmul(np.linalg.inv(np.matmul(X.T, X)), np.matmul(X.T, y))
+    # 3. return weigth @ data
+    return weight @ data
     
 def lasso(data):
-    pass
+    return ridge(data)
 
 def read_data(path='./data/exp02/'):
     x = np.load(path + 'X_train.npy')
     y = np.load(path + 'y_train.npy')
     return x, y
+
+# read_data('../data/exp02/')
